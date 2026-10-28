@@ -1,10 +1,12 @@
 // ===== HELPER FUNCTIONS - FROM SLIDE PAGE 41 - MUST BE AT TOP =====
 function showError(element, message) {
+  if (!element) return;
   element.textContent = message;
   element.style.display = 'block';
   element.style.color = 'red';
 }
 function clearError(element) {
+  if (!element) return;
   element.textContent = '';
   element.style.display = 'none';
 }
@@ -16,27 +18,66 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('mobileMenuToggle');
   const nav = document.getElementById('mainNav');
   if (toggle && nav) {
-    toggle.addEventListener('click', () => nav.classList.toggle('active'));
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      nav.classList.toggle('show');
+    });
   }
 
   // 2. FOOTER YEAR
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // 3. TABS
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  // 3. FAQ ACCORDION - ABOUT.HTML - FIXED & ADDED BACK (THIS WAS MISSING!)
+  // Supports both .faq-question and .accordion-header from your about.html
+  const faqHeaders = document.querySelectorAll('.faq-question, .accordion-header, .faq-item div:first-child');
+  faqHeaders.forEach(header => {
+    // Only attach if it's a FAQ header (has next sibling answer)
+    const answer = header.nextElementSibling;
+    if (answer && (answer.classList.contains('faq-answer') || answer.classList.contains('accordion-content'))) {
+      header.style.cursor = 'pointer';
+      header.addEventListener('click', () => {
+        const isOpen = answer.style.display === 'block' || answer.classList.contains('active');
+        
+        // Close all others
+        document.querySelectorAll('.faq-answer, .accordion-content').forEach(other => {
+          other.style.display = 'none';
+          other.classList.remove('active');
+          const h = other.previousElementSibling;
+          if (h) h.innerHTML = h.innerHTML.replace('▲','▼');
+        });
+
+        if (!isOpen) {
+          answer.style.display = 'block';
+          answer.classList.add('active');
+          header.innerHTML = header.innerHTML.replace('▼','▲');
+        }
+      });
+    }
+  });
+
+  // 4. TABS - SERVICES.HTML
+  const tabBtns = document.querySelectorAll('.tab-btn, .tab-button');
   const tabContents = document.querySelectorAll('.tab-content');
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-tab');
+      if (!target) return;
       tabBtns.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
+      tabContents.forEach(c => {
+        c.classList.remove('active');
+        c.style.display = 'none';
+      });
       btn.classList.add('active');
-      document.getElementById(target).classList.add('active');
+      const targetEl = document.getElementById(target);
+      if (targetEl) {
+        targetEl.classList.add('active');
+        targetEl.style.display = 'block';
+      }
     });
   });
 
-  // 4. LIGHTBOX
+  // 5. LIGHTBOX
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   if (lightbox && lightboxImg) {
@@ -44,13 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => {
         lightbox.style.display = 'flex';
+        lightbox.classList.add('active');
         lightboxImg.src = img.src;
       });
     });
-    lightbox.addEventListener('click', () => lightbox.style.display = 'none');
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.id === 'lightbox-close') {
+        lightbox.style.display = 'none';
+        lightbox.classList.remove('active');
+      }
+    });
   }
 
-  // 5. SEARCH + DYNAMIC LIST (Array + Function from Slide Page 3)
+  // 6. SEARCH + DYNAMIC LIST (Array + Function from Slide Page 3)
   const servicesData = [
     { title: "Monthly Packs R50", desc: "Free sanitary packs with Bodyform pads, soap, Nivea", cost: "R50", avail: "5000+ monthly" },
     { title: "Education Workshops", desc: "Health education in Soweto and Tembisa schools", cost: "Free", avail: "45 workshops 2025" },
@@ -76,72 +123,63 @@ document.addEventListener('DOMContentLoaded', () => {
       const q = searchInput.value.toLowerCase();
       const filtered = servicesData.filter(s => (s.title + s.desc).toLowerCase().includes(q));
       renderList(filtered);
+      // Also filter old .service-card if exists
+      document.querySelectorAll('.service-card').forEach(c => {
+        c.style.display = c.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
     });
   }
 
-  // 6. CONTACT FORM - USING HELPER FUNCTIONS (Slide 23 pattern)
+  // 7. CONTACT FORM - USING HELPER FUNCTIONS (Slide 23 pattern)
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
       let isValid = true;
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const msg = document.getElementById('contactMsg').value.trim();
+      const name = document.getElementById('contactName')?.value.trim();
+      const email = document.getElementById('contactEmail')?.value.trim();
+      const msg = document.getElementById('contactMsg')?.value.trim() || document.getElementById('contactMessage')?.value.trim();
       const nameErr = document.getElementById('contactNameError');
       const emailErr = document.getElementById('contactEmailError');
-      const msgErr = document.getElementById('contactMsgError');
+      const msgErr = document.getElementById('contactMsgError') || document.getElementById('contactMessageError');
 
-      if (name === "") {
-        showError(nameErr, "Full name is required");
-        isValid = false;
-      } else if (name.length < 3) {
-        showError(nameErr, "Name must have at least 3 characters");
-        isValid = false;
-      } else {
-        clearError(nameErr);
-      }
+      if (!name) { showError(nameErr, "Full name is required"); isValid = false; }
+      else if (name.length < 3) { showError(nameErr, "Name must have at least 3 characters"); isValid = false; }
+      else { clearError(nameErr); }
 
-      if (email === "") {
-        showError(emailErr, "Email is required");
-        isValid = false;
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError(emailErr, "Enter a valid email address");
-        isValid = false;
-      } else {
-        clearError(emailErr);
-      }
+      if (!email) { showError(emailErr, "Email is required"); isValid = false; }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError(emailErr, "Enter a valid email address"); isValid = false; }
+      else { clearError(emailErr); }
 
-      if (msg === "") {
-        showError(msgErr, "Message is required");
-        isValid = false;
-      } else if (msg.length < 10) {
-        showError(msgErr, "Message must be at least 10 characters");
-        isValid = false;
-      } else {
-        clearError(msgErr);
-      }
+      if (!msg) { showError(msgErr, "Message is required"); isValid = false; }
+      else if (msg.length < 10) { showError(msgErr, "Message must be at least 10 characters"); isValid = false; }
+      else { clearError(msgErr); }
 
-      if (!isValid) {
-        event.preventDefault();
-      } else {
-        document.getElementById('contactSuccess').style.display = 'block';
-        document.getElementById('contactResponse').innerHTML = '<p style="color:green">Compiled email To: info@harvestofhygiene.org | From: ' + email + '</p>';
+      if (isValid) {
+        const success = document.getElementById('contactSuccess');
+        if (success) success.style.display = 'block';
+        const response = document.getElementById('contactResponse');
+        if (response) response.innerHTML = '<p style="color:green">Compiled email To: info@harvestofhygiene.org | From: ' + email + '</p>';
         contactForm.reset();
       }
     });
   }
 
-  // 7. ENQUIRY FORM
+  // 8. ENQUIRY FORM
   const enquiryForm = document.getElementById('enquiryForm');
   if (enquiryForm) {
     enquiryForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Thank you! Cost: R50 per pack. Availability: 5000 packs/month. Workshops: Free, 45 in 2025. Volunteer: Saturdays 9am-1pm. We will email you within 24hrs.');
-      enquiryForm.reset();
+      if (enquiryForm.checkValidity()) {
+        alert('Thank you! Cost: R50 per pack. Availability: 5000 packs/month. Workshops: Free, 45 in 2025. Volunteer: Saturdays 9am-1pm. We will email you within 24hrs.');
+        enquiryForm.reset();
+      } else {
+        alert('Please fill all required fields correctly.');
+      }
     });
   }
 
-  // 8. MAPS - ESRI (NO API KEY - FIXES BLOCKED ERROR)
+  // 9. MAPS - ESRI (NO API KEY - FIXES BLOCKED ERROR)
   if (typeof L !== 'undefined') {
     const map1El = document.getElementById('map1');
     if (map1El && !map1El._leaflet_id) {
