@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Harvest of Hygiene NPO in Pretoria and Soweto - email, phone, maps, directions to 45 Vilakazi Street.">
+    <meta name="keywords" content="contact Harvest of Hygiene, NPO Pretoria, Soweto distribution centre, Vilakazi Street, hygiene NPO">
+    <meta name="author" content="Akanyang Montshiwa">
+    <title>Contact Us - Pretoria & Soweto | Harvest of Hygiene</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+<header class="navbar">
+    <div class="container nav-container">
+        <a href="index.html" class="logo">Harvest of Hygiene</a>
+        <button id="mobileMenuToggle" class="nav-toggle">☰</button>
+        <nav class="nav-links" id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">What We Do</a>
+            <a href="enquiry.html">Get Involved</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container main-padding">
+
+    <h1>Contact Us & Find Us</h1>
+    <p><b>Email:</b> info@harvestofhygiene.org | <b>Phone:</b> 071 123 4567 (WhatsApp) | <b>Office:</b> Pretoria & Soweto, Gauteng</p>
+
+    <div class="contact-wrapper">
+
+        <div class="map-card">
+            <h3>1. Pretoria Office (Main)</h3>
+            <p>123 Church Street, Pretoria, 0001 - Mon-Fri 8am-4pm</p>
+            <div id="map1" class="leaflet-map" style="height:300px; border-radius:8px;"></div>
+        </div>
+
+        <div class="map-card">
+            <h3>2. Soweto Distribution Centre</h3>
+            <p>45 Vilakazi Street, Soweto, 1868 - Where we pack and distribute packs</p>
+            <div id="map2" class="leaflet-map" style="height:300px; border-radius:8px;"></div>
+        </div>
+
+    </div>
+
+    <h3>Send us a quick message</h3>
+    <form id="contactForm" class="form-card">
+        <label for="contactName">Your Name: *</label>
+        <input type="text" id="contactName" placeholder="Your name" required minlength="2">
+        <p id="contactNameError" class="error-text" style="display:none; color:red;">Enter at least 2 characters</p>
+
+        <label for="contactEmail">Your Email: *</label>
+        <input type="email" id="contactEmail" placeholder="Your email" required>
+        <p id="contactEmailError" class="error-text" style="display:none; color:red;">Enter valid email</p>
+
+        <label for="contactType">Message Type: *</label>
+        <select id="contactType" required>
+            <option value="">-- Choose type --</option>
+            <option value="General">General Enquiry</option>
+            <option value="Support">Support / Help</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Complaint">Complaint</option>
+        </select>
+
+        <label for="contactMsg">Your Message: *</label>
+        <textarea id="contactMsg" placeholder="Your message..." rows="4" required minlength="10"></textarea>
+        <p id="contactMsgError" class="error-text" style="display:none; color:red;">Message must be at least 10 characters</p>
+
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p id="contactSuccess" class="success-text" style="display:none; color:green; font-weight:bold;"></p>
+        <div id="contactResponse"></div>
+    </form>
+
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; <span id="currentYear"></span> Harvest of Hygiene NPO | Reg: 234-567 NPO</p>
+        <p class="small">WEDE5020 Part 3 - Akanyang Montshiwa - Leaflet maps + Form validation + SEO</p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

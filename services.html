@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Our programmes - free sanitary packs R50 each, health workshops, community drives in Gauteng schools. 5000+ girls helped monthly.">
+    <meta name="keywords" content="sanitary packs Gauteng, health workshops Soweto, community drives Pretoria, NPO programmes">
+    <meta name="author" content="Akanyang Montshiwa">
+    <title>What We Do - Programmes | Harvest of Hygiene</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="container nav-container">
+        <a href="index.html" class="logo">Harvest of Hygiene</a>
+        <button id="mobileMenuToggle" class="nav-toggle" aria-label="Toggle menu">☰</button>
+        <nav class="nav-links" id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html" class="active">What We Do</a>
+            <a href="enquiry.html">Get Involved</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container main-padding">
+
+    <h1>Our Programmes</h1>
+    <p>What we do every month in Gauteng schools. We have 3 main programmes. Click tabs below.</p>
+
+    <!-- PART 3: TABS - REQUIRED -->
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="tab1">1. Monthly Packs</button>
+            <button class="tab-btn" data-tab="tab2">2. Education Workshops</button>
+            <button class="tab-btn" data-tab="tab3">3. Community Drives</button>
+        </div>
+
+        <div id="tab1" class="tab-content active">
+            <div class="service-detail">
+                <img src="images/sanitary-pack-contents.jpg" alt="Sanitary pack contents with Bodyform pads, Nivea deodorant, soap, tissues for school girls in Gauteng" class="lightbox-img responsive-img">
+                <h3>Monthly Packs - R50 Each</h3>
+                <p>We give free sanitary packs to school girls. In each pack we put Bodyform pads, small soap, Nivea deodorant, tissues and a booklet. This is the real photo of our packs.</p>
+                <ul>
+                    <li><b>Cost per pack:</b> R50 (donate via Get Involved page)</li>
+                    <li><b>Availability:</b> 5000+ packs monthly, distributed every 1st week</li>
+                    <li><b>Impact:</b> 1 pack = 1 girl stays in school for 1 month</li>
+                </ul>
+                <a href="enquiry.html" class="btn btn-primary">Donate a Pack - R50</a>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <div class="service-detail">
+                <img src="images/hygiene-products.jpg" alt="Personal hygiene education illustration used in township school workshops in Soweto and Tembisa" class="lightbox-img responsive-img">
+                <h3>Education Workshops - Free</h3>
+                <p>We go to schools in Soweto and Tembisa and teach girls about periods, hygiene and health. We use simple posters and we talk in their language.</p>
+                <ul>
+                    <li><b>Cost:</b> Free for all schools</li>
+                    <li><b>Availability:</b> 45 workshops in 2025, book via contact page</li>
+                    <li><b>Schools visited:</b> 200+ schools in Gauteng</li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary">Book a Workshop</a>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <div class="service-detail">
+                <img src="images/team-volunteers.jpg" alt="Community drive volunteers packing aid boxes with hygiene products in Pretoria office" class="lightbox-img responsive-img">
+                <h3>Community Drives - Volunteer</h3>
+                <p>We partner with local shops in Pretoria and Joburg to collect pads and soap. People can drop donations at our office or we collect. Our volunteers help pack and deliver.</p>
+                <ul>
+                    <li><b>Cost:</b> Free to volunteer, training provided</li>
+                    <li><b>Availability:</b> Every Saturday 9am-1pm, 45 Vilakazi St</li>
+                    <li><b>Partners:</b> 12 shops, 25 volunteers</li>
+                </ul>
+                <a href="enquiry.html" class="btn btn-primary">Join as Volunteer</a>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <h3>Search our services</h3>
+    <input type="text" id="serviceSearch" placeholder="Type to search - e.g. pads, workshop, donate">
+    <div id="dynamicList" class="card-grid"></div>
+    <p id="searchResults" class="small"></p>
+
+</main>
+
+<div id="lightbox" class="lightbox">
+    <span id="lightbox-close" class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged view" class="lightbox-image">
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; <span id="currentYear"></span> Harvest of Hygiene NPO | 45 Vilakazi Street, Soweto</p>
+        <p class="small">WEDE5020 Part 3 - Akanyang Montshiwa - Tabs + Lightbox + Search implemented</p>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
