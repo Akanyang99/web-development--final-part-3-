@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://akanyang99.github.io/web-development--final-part-3-/sitemap.xml
 Sitemap: https://harvestofhygiene.netlify.app/sitemap.xml
