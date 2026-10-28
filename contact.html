@@ -48,26 +48,27 @@
     </div>
 
     <h3>Send us a quick message</h3>
-    <form id="contactForm" class="form-card">
+    <form id="contactForm" class="form-card" action="https://formspree.io/f/mnqebwlo" method="POST">
         <label for="contactName">Your Name: *</label>
-        <input type="text" id="contactName" placeholder="Your name" required minlength="2">
+        <input type="text" id="contactName" name="name" placeholder="Your name" required minlength="2">
         <p id="contactNameError" class="error-text" style="display:none; color:red;">Enter at least 2 characters</p>
 
         <label for="contactEmail">Your Email: *</label>
-        <input type="email" id="contactEmail" placeholder="Your email" required>
+        <input type="email" id="contactEmail" name="email" placeholder="Your email" required>
         <p id="contactEmailError" class="error-text" style="display:none; color:red;">Enter valid email</p>
 
         <label for="contactType">Message Type: *</label>
-        <select id="contactType" required>
+        <select id="contactType" name="message_type" required>
             <option value="">-- Choose type --</option>
             <option value="General">General Enquiry</option>
             <option value="Support">Support / Help</option>
             <option value="Feedback">Feedback</option>
             <option value="Complaint">Complaint</option>
         </select>
+        <p id="contactTypeError" class="error-text" style="display:none; color:red;">Please choose a type</p>
 
         <label for="contactMsg">Your Message: *</label>
-        <textarea id="contactMsg" placeholder="Your message..." rows="4" required minlength="10"></textarea>
+        <textarea id="contactMsg" name="message" placeholder="Your message..." rows="4" required minlength="10"></textarea>
         <p id="contactMsgError" class="error-text" style="display:none; color:red;">Message must be at least 10 characters</p>
 
         <button type="submit" class="btn btn-primary">Send Message</button>
@@ -80,7 +81,7 @@
 <footer>
     <div class="container">
         <p>&copy; <span id="currentYear"></span> Harvest of Hygiene NPO | Reg: 234-567 NPO</p>
-        <p class="small">WEDE5020 Part 3 - Akanyang Montshiwa - Leaflet maps + Form validation + SEO</p>
+        <p class="small">WEDE5020 Part 3 - Akanyang Montshiwa - Leaflet maps + Form validation + SEO + Formspree Email</p>
     </div>
 </footer>
 
