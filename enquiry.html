@@ -31,38 +31,39 @@
     <h1>Volunteer or Donate</h1>
     <p>Want to help? Fill this form and we will contact you on WhatsApp or email. You can donate pads, soap or money, or you can volunteer with us in Soweto.</p>
 
-    <!-- Part 3: Dynamic Info Box for Cost/Availability -->
-    <div id="helpInfoBox" class="info-box">
+    <!-- Part 3: Dynamic Info Box for Cost/Availability - Enquiry Process Response 5/5 -->
+    <div id="helpInfoBox" class="info-box" style="padding:15px; border:1px solid #e0e0e0; border-radius:8px; background:#f9f9f9; margin-bottom:20px;">
         <p>Select how you want to help above to see cost and availability.</p>
     </div>
 
-    <form id="enquiryForm" class="form-card">
+    <form id="enquiryForm" class="form-card" action="https://formspree.io/f/mnqebwlo" method="POST">
         <label for="name">Full Name: *</label>
-        <input type="text" id="name" placeholder="e.g. Akanyang Maseko" required minlength="2">
-        <p id="nameError" class="error-text">Please enter your full name (at least 2 characters)</p>
+        <input type="text" id="name" name="name" placeholder="e.g. Akanyang Maseko" required minlength="2">
+        <p id="nameError" class="error-text" style="display:none; color:red;">Please enter your full name (at least 2 characters)</p>
 
         <label for="email">Email Address: *</label>
-        <input type="email" id="email" placeholder="e.g. yourname@gmail.com" required>
-        <p id="emailError" class="error-text">Please enter valid email e.g. name@gmail.com</p>
+        <input type="email" id="email" name="email" placeholder="e.g. yourname@gmail.com" required>
+        <p id="emailError" class="error-text" style="display:none; color:red;">Please enter valid email e.g. name@gmail.com</p>
 
         <label for="phone">Phone / WhatsApp:</label>
-        <input type="tel" id="phone" placeholder="e.g. 071 234 5678" pattern="[0-9]{10}" title="Enter 10 digit number">
+        <input type="tel" id="phone" name="phone" placeholder="e.g. 071 234 5678" pattern="[0-9]{10}" title="Enter 10 digit number">
 
         <label for="helpType">How do you want to help? *</label>
-        <select id="helpType" required>
+        <select id="helpType" name="help_type" required>
             <option value="">-- Choose --</option>
             <option value="donate_pads">Donate Pads / Soap</option>
             <option value="donate_money">Donate Money (R50 per pack)</option>
             <option value="volunteer">Volunteer in Soweto/Tembisa</option>
             <option value="partner">Partner as a shop/business</option>
         </select>
+        <p id="helpTypeError" class="error-text" style="display:none; color:red;">Please choose how you want to help</p>
 
         <label for="message">Message: *</label>
-        <textarea id="message" rows="4" placeholder="Tell us how you want to help or how many packs you want to donate..." required minlength="10"></textarea>
-        <p id="messageError" class="error-text">Please write at least 10 characters</p>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us how you want to help or how many packs you want to donate..." required minlength="10"></textarea>
+        <p id="messageError" class="error-text" style="display:none; color:red;">Please write at least 10 characters</p>
 
         <button type="submit" class="btn btn-primary">Submit Information</button>
-        <p id="formSuccess" class="success-text"></p>
+        <p id="formSuccess" class="success-text" style="display:none; color:green; font-weight:bold;"></p>
         <div id="formResponse"></div>
     </form>
 
@@ -81,7 +82,7 @@
 <footer>
     <div class="container">
         <p>&copy; <span id="currentYear"></span> Harvest of Hygiene NPO | 45 Vilakazi Street, Soweto</p>
-        <p class="small">WEDE5020 Part 3 - Akanyang Montshiwa | Deployed on Netlify</p>
+        <p class="small">WEDE5020 Part 3 - Akanyang Montshiwa | Deployed on Netlify + Formspree Email</p>
     </div>
 </footer>
 
