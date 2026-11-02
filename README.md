@@ -16,3 +16,8 @@ A responsive 5-page website for a Pretoria-based NPO fighting period poverty in 
 ```js
 function showError(element, message) { element.textContent = message; element.style.display='block'; color='red'; }
 function clearError(element) { element.textContent=''; display='none'; }
+## Changelog
+- Part 1: HTML 5 pages, NPO structure
+- Part 2: CSS responsive, images, sitemap, robots
+- Part 3: JS validation, Formspree, Leaflet map, search filter, SEO meta, lightbox, helper functions at top
+- 02 Nov 2026: Final deployment verification on mobile LTE
